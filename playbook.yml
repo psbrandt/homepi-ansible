@@ -1,0 +1,49 @@
+---
+- name: new home pi
+  hosts: all
+  become: yes
+
+  roles:
+    - mivok0.users
+    - raspbian-docker
+
+  tasks:
+    - name: 'Update APT package cache'
+      action: apt update_cache=yes
+
+    # - name: 'Upgrade APT to the lastest packages'
+    #   action: apt upgrade=safe
+
+    # - name: Enable passwordless sudo
+    #   action: 'lineinfile dest=/etc/sudoers regexp="^psbrandt" line="psbrandt ALL=(ALL:ALL) NOPASSWD: ALL" state=present'
+    #   notify: Restart ssh
+    #
+    # - name: Disallow password authentication
+    #   action: lineinfile dest=/etc/ssh/sshd_config regexp="^PasswordAuthentication" line="PasswordAuthentication no" state=present
+    #   notify: Restart ssh
+    #
+    # - name: 'Configure WIFI'
+    #   copy: src=./wpa_supplicant.conf dest=/etc/wpa_supplicant/wpa_supplicant.conf mode=0600
+    #   notify: Restart wifi
+
+    - name: Mount up device by UUID
+      mount:
+        name: /data
+        src: UUID=da78fd67-460e-4f5a-b364-b93666fa8124
+        fstype: ext4
+        state: mounted
+
+    - name: Set data drive access
+      file:
+        path: /data
+        state: directory
+        group: users
+        recurse: yes
+        mode: u=rwx,g=rwx
+
+  handlers:
+  #   - name: Restart ssh
+  #     action: service name=ssh state=restarted
+  #
+  #   - name: Restart wifi
+  #     shell: ifdown wlan0; ifup wlan0; sleep 3

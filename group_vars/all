@@ -1,0 +1,11 @@
+---
+# all hosts
+
+users:
+  - username: psbrandt
+    groups: ['sudo', 'users', 'docker']
+    uid: 1001
+    profile: |
+      alias ll='ls -lah'
+    ssh_key:
+      - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDRN/KWDjjFcmaiZlzxSdD5vOGvWB69q0fUjgyGpT5Lz2w1Ocrfdd4+wcf/paek2PWuplwCHSAE1TPC3ZWmvSqR6Mb6Ss4zjMcxSIM0GRGU921Y6tdZ7ZppFHq3DeymoqBZhZ++TVVxmcpAXZf0XUl82PkdtrWxB0yRSKGdT/QJo7CQgrqjXewtizLU4MssI4YCJveAkGemnKVvpJi3jE3mt5vvSPQEXlgLU/JaSc7Z0C0TB8/DfreIX9QjmZEqmNkhZHAMSEVzT0iGUN/3YQqDk1EJMvNozuNaGMkMKw69VsnR9KlSHhw9zMrDKF+D96fRejm4TiTqsEBOMe3gn3JtsiC2LK446CU9j4zYW9KsX28HLkmxaonWJ/UogXemxg6kAt5IbNQsHhwgViSpd2UO58EmAD7nJwbxgElR1LQXufyMv4KoRPA2YhJVdxfwwLnyGXaGMFkJJ8FSTawzAO+8XDBKYZ4F/+/00MDcFmMX5pqb4CdnaIfKfauCuq0HYycuB07QfJHWfgYPY3dFNrvOFmxh6Eoa4vUhGw0DL7bFY1rfv4Aq+K6WwMaRxcDTS9JaTAuCY2kOedytDiqO7mQ8IqyWamAU7S0JedbJX8/yW/8gFdplwc9AaYPWoy2pKJz9/GTX78VJ5wyByavQA18ijWyvEa2B7Mbf5/bTbTGdFQ== psbrandt-rpi"
