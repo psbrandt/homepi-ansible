@@ -24,3 +24,9 @@
     state: present
   with_items:
     - docker-engine
+
+- name: Create config directory
+  file: path=/etc/systemd/system/docker.service.d/ state=directory
+
+- name: Configure storage
+  copy: src=../files/docker.conf dest=/etc/systemd/system/docker.service.d/docker.conf

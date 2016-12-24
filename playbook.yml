@@ -16,7 +16,6 @@
 
     - name: Enable passwordless sudo
       action: 'lineinfile dest=/etc/sudoers regexp="^psbrandt" line="psbrandt ALL=(ALL:ALL) NOPASSWD: ALL" state=present'
-      notify: Restart ssh
 
     - name: Disallow password authentication
       action: lineinfile dest=/etc/ssh/sshd_config regexp="^PasswordAuthentication" line="PasswordAuthentication no" state=present
@@ -24,7 +23,6 @@
 
     - name: 'Configure WIFI'
       copy: src=./wpa_supplicant.conf dest=/etc/wpa_supplicant/wpa_supplicant.conf mode=0600
-      notify: Restart wifi
 
     - name: Mount up device by UUID
       mount:
