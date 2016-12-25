@@ -3,6 +3,11 @@
   hosts: all
   become: yes
 
+  vars:
+    packages_to_install: [ python-pip ]
+    pip_packages_to_install: [ docker-py ]
+    update_cache: no
+
   roles:
     - mivok0.users
     - raspbian-docker
@@ -13,6 +18,18 @@
 
     - name: 'Upgrade APT to the lastest packages'
       action: apt upgrade=safe
+
+    - name: Install some packages
+      apt: pkg="{{ item }}" state=installed update_cache="{{ update_cache }}"
+      with_items: "{{ packages_to_install }}"
+
+      # See https://www.raspberrypi.org/forums/viewtopic.php?f=29&t=126338
+    - name: Upgrade pip
+      shell: easy_install --upgrade pip
+
+    - name: install python modules
+      pip: name="{{ item }}"
+      with_items: "{{ pip_packages_to_install }}"
 
     - name: Enable passwordless sudo
       action: 'lineinfile dest=/etc/sudoers regexp="^psbrandt" line="psbrandt ALL=(ALL:ALL) NOPASSWD: ALL" state=present'
