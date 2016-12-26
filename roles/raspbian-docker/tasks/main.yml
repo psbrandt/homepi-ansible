@@ -1,5 +1,8 @@
 ---
-- name: Install dependencies
+- name: 'Update APT package cache'
+  action: apt update_cache=yes
+
+- name: 'Install dependencies'
   apt:
     pkg: "{{ item }}"
     state: latest
@@ -7,26 +10,29 @@
     - apt-transport-https
     - ca-certificates
 
-- name: Add key
+- name: 'Add key'
   apt_key:
     keyserver: 'hkp://p80.pool.sks-keyservers.net:80'
     id: 58118E89F3A912897C070ADBF76221572C52609D
     state: present
 
-- name: Add Docker repository
+- name: 'Add Docker repository'
   apt_repository:
     repo: 'deb https://apt.dockerproject.org/repo raspbian-jessie main'
     state: present
 
-- name: Install Docker
+- name: 'Update APT package cache'
+  action: apt update_cache=yes
+
+- name: 'Install Docker'
   apt:
     pkg: "{{ item }}"
     state: present
   with_items:
     - docker-engine
 
-- name: Create config directory
+- name: 'Create config directory'
   file: path=/etc/systemd/system/docker.service.d/ state=directory
 
-- name: Configure storage
+- name: 'Configure storage'
   copy: src=../files/docker.conf dest=/etc/systemd/system/docker.service.d/docker.conf
