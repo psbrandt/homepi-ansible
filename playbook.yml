@@ -4,7 +4,7 @@
   become: yes
 
   vars:
-    packages_to_install: [ python-pip ]
+    packages_to_install: [ python-pip, hfsplus, hfsutils, hfsprogs, mc, vim ]
     pip_packages_to_install: [ docker-py ]
     update_cache: no
 

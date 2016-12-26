@@ -13,4 +13,4 @@ groups_to_create:
   - name: docker
     gid: 1002
   - name: nogroup
-    gid: 65533
+    gid: 65534
